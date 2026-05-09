@@ -1,11 +1,10 @@
--- منع تكرار تشغيل السكربت إذا كان شغال أصلاً
+-- منع تكرار التشغيل
 if _G.ScriptRunning then return end
 _G.ScriptRunning = true
 
--- استدعاء الواجهة فوراً
-loadMainScript() 
-
+-- دالة تشغيل الواجهة
 function loadMainScript()
+    -- تحديث رابط المكتبة لضمان التشغيل
     local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
     
     local Window = OrionLib:MakeWindow({
@@ -27,7 +26,6 @@ function loadMainScript()
         Callback = function(Value)
             _G.AutoFarm = Value
             if Value then
-                -- هنا كود التلفيل القوي
                 print("Auto Farm Started!")
             end
         end    
@@ -35,3 +33,6 @@ function loadMainScript()
     
     OrionLib:Init()
 end
+
+-- تشغيل الواجهة فوراً
+loadMainScript()
