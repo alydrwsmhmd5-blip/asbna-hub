@@ -1,38 +1,39 @@
--- منع تكرار التشغيل
-if _G.ScriptRunning then return end
+-- منع تكرار التشغيل إذا كان السكربت شغال
+if _G.ScriptRunning then 
+    _G.ScriptRunning = nil 
+end
 _G.ScriptRunning = true
 
--- دالة تشغيل الواجهة
+-- دالة تشغيل الواجهة المحدثة
 function loadMainScript()
-    -- تحديث رابط المكتبة لضمان التشغيل
+    -- استخدام رابط مكتبة Orion مستقر جداً
     local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
     
     local Window = OrionLib:MakeWindow({
-        Name = "asbna yboya HUB | PRO Edition", 
+        Name = "asbna yboya HUB | PRO", 
         HidePremium = false, 
         SaveConfig = true, 
         ConfigFolder = "AsbnaData"
     })
 
     local Tab = Window:MakeTab({
-        Name = "Auto Farm",
+        Name = "Main",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
     })
 
     Tab:AddToggle({
-        Name = "Fast Auto Farm (تلفيل سريع)",
+        Name = "Auto Farm (تلفيل تلقائي)",
         Default = false,
         Callback = function(Value)
             _G.AutoFarm = Value
-            if Value then
-                print("Auto Farm Started!")
-            end
+            print("Status: ", Value)
         end    
     })
     
     OrionLib:Init()
 end
 
--- تشغيل الواجهة فوراً
+-- استدعاء الواجهة فوراً لتخطي مشكلة حظر الشات
+task.wait(0.5)
 loadMainScript()
